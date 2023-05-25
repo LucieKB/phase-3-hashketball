@@ -1,4 +1,5 @@
-# Write your code below game_hash
+require 'pry'
+
 def game_hash
   {
     home: {
@@ -126,4 +127,51 @@ def game_hash
   }
 end
 
-# Write code here
+def all_players 
+game_hash[:home][:players] + game_hash[:away][:players]
+end
+
+def player_stats(player_name)
+all_players.find do |thatPlayer|
+ thatPlayer[:player_name] == player_name
+end
+end
+
+def num_points_scored(player_name)
+  thatPlayer=player_stats(player_name)
+  thatPlayer[:points]
+end
+
+def shoe_size(player_name)
+  thatPlayer=player_stats(player_name)
+  thatPlayer[:shoe]
+end
+
+def find_team (team_name)
+ team_info = game_hash.find do |team_data|
+  team_data[:team_name] == team_name
+end
+team_info
+end
+
+def team_names(team)
+  game_hash.map do |team_data|
+    team_data[:team_name]
+  end
+end
+
+
+def team_colors(team_name)
+  team = find_team(team_name)
+  team[:colors]
+end
+
+
+def player_numbers(team_name)
+  all_players(team_name).map do |player|
+    player[:number]
+  end
+end
+
+
+
